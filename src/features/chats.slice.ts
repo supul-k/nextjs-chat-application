@@ -5,7 +5,7 @@ import { getTimeStamp } from "@/utils";
 
 export interface IChat {
   id: number;
-  author: "bot" | "user";
+  author: "user";
   message: string;
   timestamp: string;
   userImage: string;
