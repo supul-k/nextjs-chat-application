@@ -55,7 +55,7 @@ export const chatSlice = createSlice({
           ...state,
           {
             id: state.length + 1, // auto-incremental id for simplicity
-            author: "bot",
+            author: "receiver",
             message: payload[0],
             timestamp: getTimeStamp(),
             userImage: `https://i.pravatar.cc/48?img=2`,
