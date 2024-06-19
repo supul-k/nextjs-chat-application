@@ -82,29 +82,10 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-gray-100 min-h-screen flex flex-col items-center py-8">
-        {/* Header */}
-        <header className="my-10 text-center">
-          <h1 className="text-4xl font-bold text-blue-600">Random Chat</h1>
-          <p className="text-lg mt-2">Chat with a random bot online</p>
-        </header>
 
         <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-2xl mx-auto">
           {/* Bio */}
           <div className="flex justify-between items-center mb-4">
-            <div className="flex items-center">
-              <div className="relative">
-                <img
-                  src="https://i.pravatar.cc/64?img=2"
-                  alt="Bot"
-                  className="w-16 h-16 rounded-full"
-                />
-                <span className="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></span>
-              </div>
-              <div className="ml-4">
-                <h2 className="text-xl font-bold">Akiva's Bot</h2>
-                <p className="text-gray-600">Online</p>
-              </div>
-            </div>
             <button
               className="bg-red-500 text-white px-4 py-2 rounded"
               onClick={() => dispatch(clearChat())}
@@ -113,21 +94,17 @@ const Home = () => {
             </button>
           </div>
 
-          <p className="text-gray-600 mb-4">
-            This is the beginning of your direct message history with Akiva's Bot
-          </p>
-
           {/* Chats */}
           <div
             ref={chatBoxRef}
-            className="overflow-y-auto h-80 mb-4 border border-gray-300 rounded p-4"
+            className="overflow-y-auto h-80 mb-4 border rounded p-4"
           >
             {chats.map(({ id, author, message, timestamp, userImage, votes }, index) => (
               <div
                 key={index}
-                className={`flex justify-end mb-4`}
+                className={`flex justify-end mb-1`}
               >
-                <div className={`flex flex-row-reverse items-start w-full`}>
+                <div className={`flex flex-row-reverse items-center w-4/5`}>
                   <img
                     src={userImage}
                     alt={author}
@@ -135,22 +112,7 @@ const Home = () => {
                   />
                   <div className="ml-4 flex-1">
                     <div className="flex justify-between items-start">
-                      <div className="flex items-center">
-                        <button
-                          className="text-green-500"
-                          onClick={() => handleIncrementVote(id)}
-                        >
-                          +
-                        </button>
-                        <span className="mx-2">{votes}</span>
-                        <button
-                          className="text-red-500"
-                          onClick={() => handleDecrementVote(id)}
-                        >
-                          -
-                        </button>
-                      </div>
-                      <div className="flex space-x-2">
+                      <div className="flex flex-end space-x-2">
                         <button
                           className="text-blue-500 text-sm"
                           onClick={() => handleReply(message)}
@@ -171,11 +133,28 @@ const Home = () => {
                         </button>
                       </div>
                     </div>
-                    <p
-                      className={`p-4 rounded-lg bg-blue-500 text-white`}
-                    >
-                      {message}
-                    </p>
+                    <div className="flex">
+                      <div className="flex flex-col items-center">
+                        <button
+                          className="text-green-500"
+                          onClick={() => handleIncrementVote(id)}
+                        >
+                          +
+                        </button>
+                        <span className="mx-2">{votes}</span>
+                        <button
+                          className="text-red-500"
+                          onClick={() => handleDecrementVote(id)}
+                        >
+                          -
+                        </button>
+                      </div>
+                      <p
+                        className={`p-4 rounded-lg bg-blue-500 text-white ml-4 flex-1`}
+                      >
+                        {message}
+                      </p>
+                    </div>
                     <p className="text-gray-500 text-sm mt-1">{timestamp}</p>
                   </div>
                 </div>
@@ -191,7 +170,7 @@ const Home = () => {
             <input
               type="text"
               {...register("message", { required: true })}
-              placeholder="Send a message"
+              placeholder="Add a Comment"
               className="flex-1 p-2 border rounded-l-lg"
             />
             <button
